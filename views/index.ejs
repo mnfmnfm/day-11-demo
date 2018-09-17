@@ -9,5 +9,15 @@
 </head>
 <body>
   <h1><%= pageTitle %></h1>
+  <%- include('partials/header'); -%>
+  <ul>
+    <% tasks.forEach( task => {  %>
+      <li class="<%= task.done ? 'done' : '' %>"><%= task.title %>
+         <% if (task.done) { %>
+          ✅ 
+         <% } %>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 </html>

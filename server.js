@@ -22,7 +22,13 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (request, response) => {
-  response.render('index', {pageTitle: 'Todos BUT FROM THE SERVER JS FILE'});
+  client.query('SELECT * FROM tasks;')
+    .then( (result) => {
+      response.render('index', {
+        pageTitle: 'Todos BUT FROM THE SERVER JS FILE',
+        tasks: result.rows
+      });
+    })
 });
 
 
