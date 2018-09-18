@@ -3,11 +3,12 @@
 const pg = require('pg');
 const express = require('express');
 const ejs = require('ejs');
-const PORT = process.env.PORT || 3000;
+require('dotenv').config()
+
+const PORT = process.env.PORT;
 const app = express();
 
-const conString = process.env.DATABASE_URL ||
-  'postgres://postgres:postgrespassword@localhost:5432/task_app';
+const conString = process.env.DATABASE_URL;
 const client = new pg.Client(conString);
 client.connect();
 client.on('error', error => {
