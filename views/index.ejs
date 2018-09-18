@@ -8,14 +8,16 @@
   <link rel="stylesheet" type="text/css" href="/style.css" />
 </head>
 <body>
-  <h1><%= pageTitle %></h1>
+  <h1><a href="/tasks"><%= pageTitle %></a></h1>
   <%- include('partials/header'); -%>
   <ul>
     <% tasks.forEach( task => {  %>
-      <li class="<%= task.done ? 'done' : '' %>"><%= task.title %>
+      <li class="<%= task.done ? 'done' : '' %>">
+        <a href="/tasks/<%= task.id %>"><%= task.title %>
          <% if (task.done) { %>
           ✅ 
          <% } %>
+        </a>
       </li>
     <% }) %>
   </ul>

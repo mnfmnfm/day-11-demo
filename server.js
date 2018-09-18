@@ -2,7 +2,6 @@
 
 const pg = require('pg');
 const express = require('express');
-const ejs = require('ejs');
 require('dotenv').config()
 
 const PORT = process.env.PORT;
@@ -22,7 +21,9 @@ app.use(express.static('./public'));
 
 app.set('view engine', 'ejs');
 
-app.get('/', (request, response) => {
+// tasks index: all the tasks
+app.get('/', (req, res) => res.redirect('/tasks'));
+app.get('/tasks', (request, response) => {
   client.query('SELECT * FROM tasks;')
     .then( (result) => {
       response.render('index', {
@@ -31,6 +32,20 @@ app.get('/', (request, response) => {
       });
     })
 });
+// tasks show: details about one task
+app.get('/tasks/:id', (request, response) => {
+  let SQL = 'SELECT * FROM tasks WHERE id = $1';
+  let values = [ request.params.id ];
+  client.query(SQL, values, (err, result) => {
+    if (err) {
+      console.error(err);
+      response.redirect('/error');
+    } else {
+      response.render('index', {pageTitle: 'task', tasks: result.rows });
+    }
+  })
+});
+
 
 
 app.listen(PORT, () => {
