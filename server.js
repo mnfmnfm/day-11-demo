@@ -26,7 +26,7 @@ app.get('/', (request, response) => {
   client.query('SELECT * FROM tasks;')
     .then( (result) => {
       response.render('index', {
-        pageTitle: 'Todos BUT FROM THE SERVER JS FILE',
+        pageTitle: 'Todos BUT UPDATED',
         tasks: result.rows
       });
     })
