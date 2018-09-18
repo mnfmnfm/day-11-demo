@@ -41,7 +41,7 @@ app.get('/tasks/:id', (request, response) => {
       console.error(err);
       response.redirect('/error');
     } else {
-      response.render('index', {pageTitle: 'task', tasks: result.rows });
+      response.render('show', {task: result.rows[0] });
     }
   })
 });

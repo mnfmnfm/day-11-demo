@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Todos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="/style.css" />
-</head>
+<%- include('partials/head'); %>
 <body>
-  <h1><a href="/tasks"><%= pageTitle %></a></h1>
-  <%- include('partials/header'); -%>
+  <%- include('partials/header', {title: 'All The Todos'}); %>
   <ul>
     <% tasks.forEach( task => {  %>
       <li class="<%= task.done ? 'done' : '' %>">
-        <a href="/tasks/<%= task.id %>"><%= task.title %>
-         <% if (task.done) { %>
-          ✅ 
-         <% } %>
+        <a href="/tasks/<%= task.id %>">
+          <%- include('partials/task', {task: task}); %>
         </a>
       </li>
     <% }) %>
