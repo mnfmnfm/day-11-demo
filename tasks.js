@@ -33,7 +33,18 @@ function getOneTask(request, response){
   })
 }
 
+const createTask = (request, response) => {
+  console.log('got a post!');
+  let SQL = 'INSERT INTO tasks (title, done) VALUES ($1, $2);';
+  let values = [request.body.title, !!request.body.done];
+
+  client.query(SQL, values, (err, result) => {
+    response.redirect('/tasks');
+  });
+}
+
 module.exports = {
   getTasks: getTasks,
-  getOneTask: getOneTask
+  getOneTask: getOneTask,
+  createTask: createTask
 };

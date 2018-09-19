@@ -20,8 +20,15 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.redirect('/tasks'));
 app.get('/tasks', tasks.getTasks);
 
+app.get('/tasks/newform', (request, response) => {
+  response.render('newtask');
+});
+
 // tasks show: details about one task
 app.get('/tasks/:id', tasks.getOneTask);
+
+// tasks create: make a new task
+app.post('/tasks', tasks.createTask);
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}!`);
