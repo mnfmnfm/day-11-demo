@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/head'); %>
+<body>
+  <%- include('partials/header', {title: 'Arrests'}); %>
+  <% arrests.forEach(arrest => { %>
+    <h3><%= arrest.Category %> (<%= arrest.arrest_count %>)</h3>
+  <% }) %>
+</body>
+</html>
