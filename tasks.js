@@ -28,7 +28,9 @@ function getOneTask(request, response){
       console.error(err);
       response.redirect('/error');
     } else {
-      response.render('show', {task: result.rows[0] });
+      response.render('show', {
+        task: result.rows[0],
+        potato: !!request.query.added });
     }
   })
 }
@@ -40,7 +42,7 @@ const createTask = (request, response) => {
 
   client.query(SQL, values, (err, result) => {
     console.log(result);
-    response.redirect(`/tasks/${result.rows[0].id}`);
+    response.redirect(`/tasks/${result.rows[0].id}?added=true`);
   });
 }
 

@@ -3,6 +3,9 @@
 <%- include('partials/head'); -%>
 <body>
   <%- include('partials/header', {title: task.title}); -%>
+  <% if (potato) { %>
+    <p>Successfully added to the database!</p>
+  <% } %>
   <%- include('partials/task', {task: task}); %>
 </body>
 </html>
