@@ -35,11 +35,12 @@ function getOneTask(request, response){
 
 const createTask = (request, response) => {
   console.log('got a post!');
-  let SQL = 'INSERT INTO tasks (title, done) VALUES ($1, $2);';
+  let SQL = 'INSERT INTO tasks (title, done) VALUES ($1, $2) RETURNING id;';
   let values = [request.body.title, !!request.body.done];
 
   client.query(SQL, values, (err, result) => {
-    response.redirect('/tasks');
+    console.log(result);
+    response.redirect(`/tasks/${result.rows[0].id}`);
   });
 }
 
