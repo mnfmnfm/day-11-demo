@@ -1,3 +1,8 @@
 h1 {
   background-color: lightskyblue;
 }
+
+form {
+  display: inline-block;
+  margin-left: 20px;
+}

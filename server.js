@@ -39,6 +39,16 @@ app.get('/tasks/newform', (request, response) => {
   response.render('newtask');
 });
 
+app.get('/tasks/search', (request, response) => {
+  console.log(request.query.query);
+  superagent.get('http://super-crud.herokuapp.com/todos')
+    .end( (err, apiResponse) => {
+      console.log(apiResponse.body.todos);
+      let tasks = apiResponse.body.todos.map(todo => ({title: todo.body, done: todo.completed}));
+      response.render('searchresults', {tasks: tasks});
+    })
+});
+
 // tasks show: details about one task
 app.get('/tasks/:id', tasks.getOneTask);
 
