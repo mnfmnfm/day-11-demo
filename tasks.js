@@ -46,8 +46,15 @@ const createTask = (request, response) => {
   });
 }
 
+const deleteOneTask = (request, response) => {
+  client.query('DELETE FROM tasks WHERE id = $1', [request.params.id], (err, result) => {
+    response.redirect('/tasks');
+  })
+};
+
 module.exports = {
   getTasks: getTasks,
   getOneTask: getOneTask,
-  createTask: createTask
+  createTask: createTask,
+  deleteOneTask: deleteOneTask
 };

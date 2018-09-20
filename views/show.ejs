@@ -7,5 +7,9 @@
     <p>Successfully added to the database!</p>
   <% } %>
   <%- include('partials/task', {task: task}); %>
+  <form action="/tasks/<%= task.id %>" method="POST" >
+    <input type="hidden" name="_method" value="DELETE">
+    <button>Delete!</button>
+  </form>
 </body>
 </html>

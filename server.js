@@ -8,12 +8,22 @@ const app = express();
 
 const superagent = require('superagent');
 
+const methodOverride = require('method-override')
+
 const tasks = require('./tasks');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
 
 app.set('view engine', 'ejs');
 
@@ -54,6 +64,8 @@ app.get('/tasks/:id', tasks.getOneTask);
 
 // tasks create: make a new task
 app.post('/tasks', tasks.createTask);
+
+app.delete('/tasks/:id', tasks.deleteOneTask);
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}!`);
