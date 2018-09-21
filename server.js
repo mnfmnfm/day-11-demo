@@ -49,6 +49,8 @@ app.get('/tasks/newform', (request, response) => {
   response.render('newtask');
 });
 
+app.get('/tasks/:id/edit', tasks.editTask);
+
 app.get('/tasks/search', (request, response) => {
   console.log(request.query.query);
   superagent.get('http://super-crud.herokuapp.com/todos')
@@ -64,6 +66,8 @@ app.get('/tasks/:id', tasks.getOneTask);
 
 // tasks create: make a new task
 app.post('/tasks', tasks.createTask);
+
+app.put('/tasks/:id', tasks.updateTask);
 
 app.delete('/tasks/:id', tasks.deleteOneTask);
 
