@@ -3,6 +3,14 @@
 <%- include('partials/head'); -%>
 <body>
   <%- include('partials/header', {title: task.title}); -%>
+  <% if (potato) { %>
+    <p>Successfully added to the database!</p>
+  <% } %>
   <%- include('partials/task', {task: task}); %>
+  <a href="/tasks/<%= task.id %>/edit">Edit todo</a>
+  <form action="/tasks/<%= task.id %>" method="POST" >
+    <input type="hidden" name="_method" value="DELETE">
+    <button>Delete!</button>
+  </form>
 </body>
 </html>

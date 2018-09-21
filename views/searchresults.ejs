@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/head'); %>
+<body>
+  <%- include('partials/header', {title: 'All The Todos'}); %>
+  <ul>
+    <% tasks.forEach( task => {  %>
+      <li class="<%= task.done ? 'done' : '' %>">
+        <%- include('partials/task', {task: task}); %>
+        <form action="/tasks" method="POST">
+          <input name="title" type="hidden" value="<%= task.title %>" />
+          <input name="done" type="hidden" value="<%= task.done ? 'on' : '' %>" />
+          <button>Save!</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

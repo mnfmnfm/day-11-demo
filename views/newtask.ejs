@@ -3,10 +3,6 @@
 <%- include('partials/head'); %>
 <body>
   <%- include('partials/header', {title: 'Add a Todo'}); %>
-  <form action="/tasks" method="POST">
-    <label>Title: <input type="text" name="title" /></label>
-    <label>Done: <input type="checkbox" name="done" /></label>
-    <input type="submit" />
-  </form>
+  <%- include('partials/form', {task: {}, edit: false }) %>
 </body>
 </html>
